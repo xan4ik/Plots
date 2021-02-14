@@ -10,5 +10,11 @@ namespace Plots
     {
         public float X;
         public float Y;
+
+        public PlotPoint(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
     }
 }
