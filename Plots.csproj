@@ -52,6 +52,9 @@
     <Compile Include="Source\Exceptions\DecoratorLinkException.cs" />
     <Compile Include="Source\Exceptions\DimensionException.cs" />
     <Compile Include="Source\Exceptions\EqualDecoratorException.cs" />
+    <Compile Include="Source\Interfaces\IDrawer.cs" />
+    <Compile Include="Source\Interfaces\IModelCreator.cs" />
+    <Compile Include="Source\Interfaces\IViewer.cs" />
     <Compile Include="Source\Structures\PlotDimension.cs" />
     <Compile Include="Source\Structures\PlotExtristics.cs" />
     <Compile Include="Source\Structures\PlotIntristics.cs" />
