@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MathFunctionModelCreator.cs" />
     <Compile Include="PlotDecorator.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawer\AxisMathModel.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawer\AxisModelCreator.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawer\AxisModelViewer.cs" />
+    <Compile Include="Source\DrawingComponents\DrawingProcessBlock.cs" />
     <Compile Include="Source\Interfaces\IDrawer.cs" />
     <Compile Include="Source\Interfaces\IModelCreator.cs" />
     <Compile Include="Source\Interfaces\IViewer.cs" />
@@ -61,6 +66,7 @@
     <Compile Include="Source\Structures\PlotPoint.cs" />
     <Compile Include="Source\Structures\PlotSize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

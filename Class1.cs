@@ -252,7 +252,7 @@ namespace Plots
         }
 
         //TODO: Maybe intristics will do that?
-        public PlotPoint ProjectPLotPointToModel(PlotPoint plotPoint)
+        public PlotPoint ProjectPlotPointToModel(PlotPoint plotPoint)
         {
             return new PlotPoint()
             {
