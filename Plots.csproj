@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlotDecorator.cs" />
+    <Compile Include="Source\Interfaces\IDrawer.cs" />
+    <Compile Include="Source\Interfaces\IModelCreator.cs" />
+    <Compile Include="Source\Interfaces\IViewer.cs" />
     <Compile Include="Source\Exceptions\AttributeNotFoundException.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Source\Exceptions\DecoratorAlreadyExistException.cs" />
