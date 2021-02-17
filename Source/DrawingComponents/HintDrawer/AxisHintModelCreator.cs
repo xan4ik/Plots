@@ -10,8 +10,6 @@ namespace Plots
         private PlotPoint zero;
         private uint hintsPerAxis;
         private float hintOffset;
-        private float stepX;
-        private float stepY;
 
         public AxisHintModelCreator(PlotDimension plotDimension, uint hintsPerAxis = 10, float hintLength = 5)
         {
@@ -24,12 +22,12 @@ namespace Plots
             zero = new PlotPoint(0, 0);
         }
 
-        //TODO: offset positions / step XY
+        //TODO: offset positions
         public AxisHintModel CreateModel(PlotToModelProjector projector)
         {
-            
-            var xValues = GetAxisValues(plotDimension.MinX, plotDimension.MaxX, stepX);
-            var yValues = GetAxisValues(plotDimension.MinY, plotDimension.MaxY, stepY);
+            var steps = GetStepValues();
+            var xValues = GetAxisValues(plotDimension.MinX, plotDimension.MaxX, steps.X);
+            var yValues = GetAxisValues(plotDimension.MinY, plotDimension.MaxY, steps.Y);
             var xPositions = GetPostionsOnAxis(projector, axisX, xValues);
             var yPositions = GetPostionsOnAxis(projector, axisY, yValues);
             var xLines = GetHintLineBeginEnd(xPositions, axisX);
@@ -47,21 +45,17 @@ namespace Plots
             };
         }
 
-        private PlotPoint[] GetHintLineBeginEnd(PlotPoint[] positionOnAxis, PlotPoint axis) 
+        private PlotPoint GetStepValues()
         {
-            PlotPoint[] linesBeginEnd = new PlotPoint[hintsPerAxis * 2];
-            for (int i = 0; i < positionOnAxis.Length; i++)
-            {
-                linesBeginEnd[2 * i] = PlotPoint.MoveFromOrigin(positionOnAxis[i], axis, hintOffset);
-                linesBeginEnd[2 * i + 1] = PlotPoint.MoveFromOrigin(positionOnAxis[i], axis, -hintOffset);
-            }
-            return linesBeginEnd;
+            var stepX = Math.Abs(plotDimension.MinX - plotDimension.MaxX) / hintsPerAxis;
+            var stepY = Math.Abs(plotDimension.MinY - plotDimension.MaxY) / hintsPerAxis;
+            return new PlotPoint(stepX, stepY);
         }
 
         private float[] GetAxisValues(float begin, float end, float step)
         {
             float[] values = new float[hintsPerAxis]; var index = 0;
-            for (float position = begin; begin < end; position+=step)
+            for (float position = begin; begin < end; position += step)
             {
                 values[index] = position;
                 index++;
@@ -69,7 +63,7 @@ namespace Plots
             return values;
         }
 
-        private PlotPoint[] GetPostionsOnAxis(PlotToModelProjector projector, PlotPoint axis, float[] values) 
+        private PlotPoint[] GetPostionsOnAxis(PlotToModelProjector projector, PlotPoint axis, float[] values)
         {
             PlotPoint[] positions = new PlotPoint[hintsPerAxis];
             for (int i = 0; i < values.Length; i++)
@@ -82,10 +76,15 @@ namespace Plots
             return positions;
         }
 
-        private void UpdateStepValues() 
+        private PlotPoint[] GetHintLineBeginEnd(PlotPoint[] positionOnAxis, PlotPoint axis) 
         {
-            stepX = Math.Abs(plotDimension.MinX - plotDimension.MaxX) / hintsPerAxis;
-            stepY = Math.Abs(plotDimension.MinY - plotDimension.MaxY) / hintsPerAxis;
+            PlotPoint[] linesBeginEnd = new PlotPoint[hintsPerAxis * 2];
+            for (int i = 0; i < positionOnAxis.Length; i++)
+            {
+                linesBeginEnd[2 * i] = PlotPoint.MoveFromOrigin(positionOnAxis[i], axis, hintOffset);
+                linesBeginEnd[2 * i + 1] = PlotPoint.MoveFromOrigin(positionOnAxis[i], axis, -hintOffset);
+            }
+            return linesBeginEnd;
         }
     }
 

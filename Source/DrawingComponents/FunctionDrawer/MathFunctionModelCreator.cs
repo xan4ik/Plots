@@ -8,29 +8,32 @@ namespace Plots
     public class MathFunctionModelCreator : IModelCreator<MathFunctionModel>
     {
         private IMathFunction mathFunction;
-        private List<PlotPoint> points;
         private uint pointsCount;
 
         public MathFunctionModelCreator(IMathFunction mathFunction, uint pointsCount)
         {
             this.mathFunction = mathFunction;
             this.pointsCount = pointsCount;
-            this.points = new List<PlotPoint>();
         }
 
         public MathFunctionModel CreateModel(PlotToModelProjector projector)
         {
             var step = CalculateStepOffset();
-            points.Clear();
+            var points = CreateNewArray(); int index = 0;
 
             for (float x = mathFunction.Range.MinX; x < mathFunction.Range.MaxX; x += step)
             {
                 var plotPoint = new PlotPoint(x, mathFunction.FunctionValueOf(x));
                 var modelPoint = projector.ProjectPlotPointToModel(plotPoint);
-                points.Add(modelPoint);
+                points[index] = modelPoint; index++;
             }
 
-            return new MathFunctionModel(pointsCount, points.ToArray());
+            return new MathFunctionModel(pointsCount, points);
+        }
+
+        private PlotPoint[] CreateNewArray() 
+        {
+            return new PlotPoint[pointsCount];
         }
 
         private float CalculateStepOffset() 
