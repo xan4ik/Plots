@@ -1,11 +1,11 @@
 ﻿namespace Plots
 {
-    public class MathFunctionModel
+    public class MathPointModel
     {
-        public uint PointCount;
         public PlotPoint[] Points;
+        public uint PointCount;
 
-        public MathFunctionModel(uint pointCount, PlotPoint[] points)
+        public MathPointModel(PlotPoint[] points, uint pointCount)
         {
             PointCount = pointCount;
             Points = points;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Plots
 {
     // TODO: list?
-    public class MathFunctionModelCreator : IModelCreator<MathFunctionModel>
+    public class MathFunctionModelCreator : IModelCreator<MathPointModel>
     {
         private IMathFunction mathFunction;
         private uint pointsCount;
@@ -16,7 +16,7 @@ namespace Plots
             this.pointsCount = pointsCount;
         }
 
-        public MathFunctionModel CreateModel(PlotToModelProjector projector)
+        public MathPointModel CreateModel(PlotToModelProjector projector)
         {
             var step = CalculateStepOffset();
             var points = CreateNewArray(); int index = 0;
@@ -28,7 +28,7 @@ namespace Plots
                 points[index] = modelPoint; index++;
             }
 
-            return new MathFunctionModel(pointsCount, points);
+            return new MathPointModel(points, pointsCount);
         }
 
         private PlotPoint[] CreateNewArray() 
