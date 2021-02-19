@@ -41,17 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\DrawingComponents\FunctionDrawer\MathPointModel.cs" />
     <Compile Include="Source\DrawingComponents\HintDrawer\AxisHintModelCreator.cs" />
     <Compile Include="Source\DrawingComponents\HintDrawer\AxisHintViewer.cs" />
     <Compile Include="Source\DrawingComponents\AxisDrawer\AxisMathModel.cs" />
-    <Compile Include="Source\DrawingComponents\AxisDrawer\AxisModelCreator.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawer\ZeroAxisModelCreator.cs" />
     <Compile Include="Source\DrawingComponents\AxisDrawer\AxisModelViewer.cs" />
     <Compile Include="Source\DrawingComponents\DrawingProcessBlock.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\IMathFunction.cs" />
-    <Compile Include="Source\DrawingComponents\FunctionDrawer\MathFunctionModel.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\MathFunctionModelCreator.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\MathFunctionViewer.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\Range.cs" />
+    <Compile Include="Source\DrawingComponents\PointDrawer\DefaultPoint\PointsModelCreator.cs" />
+    <Compile Include="Source\DrawingComponents\PointDrawer\DefaultPoint\PointsModelViewer.cs" />
+    <Compile Include="Source\DrawingComponents\PointDrawer\PlotPointCreator.cs" />
+    <Compile Include="Source\DrawingComponents\PointDrawer\PointWithLocation\LocationPointsCreator.cs" />
+    <Compile Include="Source\DrawingComponents\PointDrawer\PointWithLocation\LocationPointsViewer.cs" />
+    <Compile Include="Source\DrawingComponents\PointDrawer\PointWithLocation\PointWithLocationModel.cs" />
     <Compile Include="Source\Exceptions\AttributeNotFoundException.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Source\Exceptions\DecoratorAlreadyExistException.cs" />

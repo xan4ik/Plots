@@ -4,5 +4,6 @@
     {
         void DrawLine(PlotPoint begin, PlotPoint end);
         void DrawString(PlotPoint position, string text);
+        void DrawPoint(PlotPoint point);
     }
 }
