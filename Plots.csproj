@@ -41,16 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AxisAndLocationModel.cs" />
-    <Compile Include="AxisAndLocationViewer.cs" />
-    <Compile Include="AxisModelCreator.cs" />
-    <Compile Include="LocationAxisModelCreator.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawers\AxisWithLocation\AxisAndLocationModel.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawers\AxisWithLocation\AxisAndLocationViewer.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawers\AxisModelCreator.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawers\AxisWithLocation\LocationAxisModelCreator.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\MathPointModel.cs" />
     <Compile Include="Source\DrawingComponents\HintDrawer\AxisHintModelCreator.cs" />
     <Compile Include="Source\DrawingComponents\HintDrawer\AxisHintViewer.cs" />
-    <Compile Include="Source\DrawingComponents\AxisDrawer\AxisMathModel.cs" />
-    <Compile Include="Source\DrawingComponents\AxisDrawer\ZeroAxisModelCreator.cs" />
-    <Compile Include="Source\DrawingComponents\AxisDrawer\AxisModelViewer.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawers\AxisDrawer\AxisMathModel.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawers\AxisDrawer\ZeroAxisModelCreator.cs" />
+    <Compile Include="Source\DrawingComponents\AxisDrawers\AxisDrawer\AxisModelViewer.cs" />
     <Compile Include="Source\DrawingComponents\DrawingProcessBlock.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\IMathFunction.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\MathFunctionModelCreator.cs" />
@@ -80,6 +80,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\DrawingComponents\HintDrawer\AxisHintModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Source\SettingsComponents\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,20 +10,6 @@ namespace Plots
     //validator
     //drawers -> PointProvider/IntristicsProvider
     //namespace of esceptions
-    public sealed class PlotProvider
-    {
-        //validator
-        public void AddComponent(PlotComponent component)
-        {
-
-        }
-    }
-
-    public abstract class PlotComponent
-    {
-
-
-    }
 
     public enum DrawQueue 
     {
@@ -42,11 +28,20 @@ namespace Plots
 
     public class AllDrawer 
     {
-        public List<IDrawingProcessBlock> blocks = new List<IDrawingProcessBlock>();
+        public List<IDrawingProcessBlock> dr_blocks = new List<IDrawingProcessBlock>();
+        public List<ISettingUpdateBlock> st_blocks = new List<ISettingUpdateBlock>();
 
-        public void Draw(IDrawer drawer, PlotToModelProjector projector) 
+        public PlotExtristics extristics;
+
+        public void Draw(IDrawer drawer) 
         {
-            foreach (var item in blocks)
+            foreach (var item in st_blocks)
+            {
+                extristics = item.UpdateExtristics(extristics);
+            }
+
+            var projector = new PlotToModelProjector(extristics);
+            foreach (var item in dr_blocks)
             {
                 item.Draw(drawer, projector);
             }
@@ -56,6 +51,51 @@ namespace Plots
 
 
 
+    public interface ISettingUpdateBlock 
+    {
+        PlotExtristics UpdateExtristics(PlotExtristics old);
+    }
+
+
+    public class SizeChangeBlock : ISettingUpdateBlock
+    {
+        private float step;
+
+        public void ChangeBy(float step) 
+        {
+            this.step = step;
+        }
+
+        public PlotExtristics UpdateExtristics(PlotExtristics old)
+        {
+            old.MultiplierX += step;
+            old.MultiplierY += step;
+            step = 0;
+            return old;
+        }
+    }
+
+
+    public class CenterMoveBlock : ISettingUpdateBlock
+    {
+        private float offsetX;
+        private float offsetY;
+
+        public void MoveCenter(float offsetX, float offsetY) 
+        {
+            this.offsetX = offsetX;
+            this.offsetY = offsetY;
+        }
+
+        public PlotExtristics UpdateExtristics(PlotExtristics old)
+        {
+            old.Center = PlotPoint.MoveFromOrigin(old.Center, offsetX, offsetY);
+            offsetX = 0;
+            offsetY = 0;
+
+            return old;
+        }
+    }
 
 
 

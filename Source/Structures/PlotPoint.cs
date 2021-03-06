@@ -17,9 +17,21 @@ namespace Plots
             Y = y;
         }
 
+        public PlotPoint Move(float offsetX, float offsetY) 
+        {
+            return MoveFromOrigin(this, offsetX, offsetY);
+        }
+
         public PlotPoint Move(PlotPoint axis, float offset) 
         {
             return MoveFromOrigin(this, axis, offset);
+        }
+
+        public static PlotPoint MoveFromOrigin(PlotPoint origin, float offsetX, float offsetY) 
+        {
+            var x = origin.X + offsetX;
+            var y = origin.Y + offsetY;
+            return new PlotPoint(x, y);
         }
 
         public static PlotPoint MoveFromOrigin(PlotPoint origin, PlotPoint axis, float offset) 
