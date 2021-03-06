@@ -5,14 +5,14 @@ namespace Plots
 {
     public struct PlotExtristics
     {
-        private PlotSize framePixelSize;
+        private PlotSize frameSize;
         private PlotPoint frameCenter;
         private float multiplierX;
         private float multiplierY;
 
-        public PlotExtristics(PlotSize framePixelSize, PlotPoint frameCenter, float multiplierX = 1, float multiplierY = 1)
+        public PlotExtristics(PlotSize frameSize, PlotPoint frameCenter, float multiplierX = 1, float multiplierY = 1)
         {
-            this.framePixelSize = framePixelSize;
+            this.frameSize = frameSize;
             this.frameCenter = frameCenter;
             this.multiplierX = multiplierX;
             this.multiplierY = multiplierY;
@@ -26,8 +26,8 @@ namespace Plots
 
         public PlotSize FrameSize 
         {
-            get => framePixelSize;
-            set => framePixelSize = value;
+            get => frameSize;
+            set => frameSize = value;
         }
 
         public float MultiplierX 
@@ -44,7 +44,7 @@ namespace Plots
 
         public PlotExtristics Clone()
         {
-            return new PlotExtristics(framePixelSize, frameCenter);
+            return new PlotExtristics(frameSize, frameCenter);
         }
     }
 }

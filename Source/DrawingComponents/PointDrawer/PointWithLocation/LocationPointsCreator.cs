@@ -2,6 +2,9 @@
 {
     public class LocationPointsCreator : PlotPointCreator<PointWithLocationModel>
     {
+        public LocationPointsCreator(params PlotPoint[] points) : base(points)
+        { }
+
         public override PointWithLocationModel CreateModel(PlotToModelProjector projector)
         {
             var sourceData = GetSourcePoints();
@@ -11,8 +14,8 @@
 
             foreach (var point in sourceData)
             {
-                plotPoints[index] = projector.ProjectPlotPointToModel(point);
-                modelPoints[index] = point;
+                plotPoints[index] = point;
+                modelPoints[index] = projector.ProjectPlotPointToModel(point);
                 index++;
             }
 

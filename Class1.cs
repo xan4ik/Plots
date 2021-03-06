@@ -1,5 +1,6 @@
 ﻿using Plots.Exeptions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,15 +38,22 @@ namespace Plots
         DrawQueue DrawQueue { get; }
     }
 
-    public class ProcessBlock<T> : IDrawingProcessBlock
-    {
-        public DrawQueue DrawQueue => throw new NotImplementedException();
 
-        public void Draw(IDrawer drawer, PlotToModelProjector projector)
+
+    public class AllDrawer 
+    {
+        public List<IDrawingProcessBlock> blocks = new List<IDrawingProcessBlock>();
+
+        public void Draw(IDrawer drawer, PlotToModelProjector projector) 
         {
-            throw new NotImplementedException();
+            foreach (var item in blocks)
+            {
+                item.Draw(drawer, projector);
+            }
         }
+    
     }
+
 
 
 
@@ -79,8 +87,8 @@ namespace Plots
         {
             return new PlotPoint()
             {
-                X = model.X / extristics.MultiplierX - extristics.Center.X,
-                Y = model.Y / extristics.MultiplierY + extristics.Center.Y,
+                X = (model.X - extristics.Center.X ) / extristics.MultiplierX,
+                Y = (-model.Y + extristics.Center.Y ) / extristics.MultiplierY
             };
         }
 
@@ -93,84 +101,6 @@ namespace Plots
                 X = frameSize.WidthPixel,
                 Y = frameSize.HeightPixel
             };
-        }
-    }
-
-
-
-
-
-
-    //TODO: rename
-    public class LocationAxisModelCreator : AxisModelCreator<AxisAndLocationModel>
-    {
-        private PlotPoint modelPoint;
-
-        public PlotPoint Center 
-        {
-            set 
-            {
-                modelPoint = value;
-            }
-        }
-
-        public override AxisAndLocationModel CreateModel(PlotToModelProjector projector)
-        {
-            var mathModel = GetAxisThroughtPoint(projector, modelPoint);
-            var axisCenter = projector.ProjectModelToPlotPoint(modelPoint);
-
-            return new AxisAndLocationModel(mathModel, axisCenter, modelPoint);
-        }
-    }
-
-    //TODO: is viewer good idea?
-    public class AxisAndLocationViewer : IViewer<AxisAndLocationModel>
-    {
-        private AxisModelViewer axisViewer;
-        public AxisAndLocationViewer()
-        {
-            axisViewer = new AxisModelViewer();
-        }
-
-        public void ShowModel(IDrawer drawer, AxisAndLocationModel model)
-        {
-            axisViewer.ShowModel(drawer, model.Axis);
-            drawer.DrawString(model.ModelCenter, GetLocationString(model.PlotCenter));
-        }
-
-        private string GetLocationString(PlotPoint point) 
-        {
-            return String.Format("({0:0.00}, {1:0.00})", point.X, point.Y);
-        }
-    }
-
-    public abstract class AxisModelCreator<T> : IModelCreator<T>
-    {
-        public abstract T CreateModel(PlotToModelProjector projector);
-
-        protected AxisMathModel GetAxisThroughtPoint(PlotToModelProjector projector, PlotPoint modelPoint) 
-        {
-            var maxModelPoint = projector.GetMaxModelPoint();
-            var xBegin = new PlotPoint(0, modelPoint.Y);
-            var yBegin = new PlotPoint(modelPoint.Y, 0);
-            var xEnd = new PlotPoint(maxModelPoint.X, modelPoint.Y);
-            var yEnd = new PlotPoint(modelPoint.X, maxModelPoint.Y);
-
-            return new AxisMathModel(xBegin, xEnd, yBegin, yEnd);
-        } 
-    }
-
-    public struct AxisAndLocationModel
-    {
-        public AxisMathModel Axis;
-        public PlotPoint PlotCenter;
-        public PlotPoint ModelCenter;
-
-        public AxisAndLocationModel(AxisMathModel axis, PlotPoint plot, PlotPoint model)
-        {
-            Axis = axis;
-            PlotCenter = plot;
-            ModelCenter = model;
         }
     }
 }

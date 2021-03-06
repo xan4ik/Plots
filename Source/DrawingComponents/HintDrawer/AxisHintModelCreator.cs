@@ -30,8 +30,8 @@ namespace Plots
             var yValues = GetAxisValues(plotDimension.MinY, plotDimension.MaxY, steps.Y);
             var xPositions = GetPostionsOnAxis(projector, axisX, xValues);
             var yPositions = GetPostionsOnAxis(projector, axisY, yValues);
-            var xLines = GetHintLineBeginEnd(xPositions, axisX);
-            var yLines = GetHintLineBeginEnd(yPositions, axisY);
+            var xLines = GetHintLineBeginEnd(xPositions, axisY);
+            var yLines = GetHintLineBeginEnd(yPositions, axisX);
 
             return new AxisHintModel()
             {
@@ -55,7 +55,7 @@ namespace Plots
         private float[] GetAxisValues(float begin, float end, float step)
         {
             float[] values = new float[hintsPerAxis]; var index = 0;
-            for (float position = begin; begin < end; position += step)
+            for (float position = begin; position < end; position += step)
             {
                 values[index] = position;
                 index++;

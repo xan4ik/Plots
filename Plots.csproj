@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AxisAndLocationModel.cs" />
+    <Compile Include="AxisAndLocationViewer.cs" />
+    <Compile Include="AxisModelCreator.cs" />
+    <Compile Include="LocationAxisModelCreator.cs" />
     <Compile Include="Source\DrawingComponents\FunctionDrawer\MathPointModel.cs" />
     <Compile Include="Source\DrawingComponents\HintDrawer\AxisHintModelCreator.cs" />
     <Compile Include="Source\DrawingComponents\HintDrawer\AxisHintViewer.cs" />

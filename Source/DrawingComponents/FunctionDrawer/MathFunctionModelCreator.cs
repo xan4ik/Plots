@@ -21,7 +21,7 @@ namespace Plots
             var step = CalculateStepOffset();
             var points = CreateNewArray(); int index = 0;
 
-            for (float x = mathFunction.Range.MinX; x < mathFunction.Range.MaxX; x += step)
+            for (float x = mathFunction.Range.MinX; x < mathFunction.Range.MaxX - step; x += step)
             {
                 var plotPoint = new PlotPoint(x, mathFunction.FunctionValueOf(x));
                 var modelPoint = projector.ProjectPlotPointToModel(plotPoint);

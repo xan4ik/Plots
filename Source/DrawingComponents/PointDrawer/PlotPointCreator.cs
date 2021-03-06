@@ -5,7 +5,7 @@ namespace Plots
     public abstract class PlotPointCreator<T> : IModelCreator<T> 
     {
         private List<PlotPoint> points;
-        public PlotPointCreator(params PlotPoint[] plotPoints)
+        protected PlotPointCreator(params PlotPoint[] plotPoints)
         {
             points = new List<PlotPoint>();
             foreach (PlotPoint point in plotPoints)

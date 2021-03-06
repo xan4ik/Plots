@@ -2,6 +2,9 @@
 {
     public class PointsModelCreator : PlotPointCreator<MathPointModel>
     {
+        public PointsModelCreator(params PlotPoint[] points): base(points)
+        { }
+
         public override MathPointModel CreateModel(PlotToModelProjector projector)
         {
             var sourceData = GetSourcePoints();

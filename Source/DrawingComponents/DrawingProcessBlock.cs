@@ -17,7 +17,8 @@ namespace Plots
 
         public void Draw(IDrawer drawer, PlotToModelProjector projector)
         {
-            throw new NotImplementedException();
+            var model = modelCreator.CreateModel(projector);
+            modelViewer.ShowModel(drawer, model);
         }
     }
 }
