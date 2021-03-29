@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Attributes\AllowMultipleUsageAttribute.cs" />
     <Compile Include="Source\DrawingComponents\AxisDrawers\AxisWithLocation\AxisAndLocationModel.cs" />
     <Compile Include="Source\DrawingComponents\AxisDrawers\AxisWithLocation\AxisAndLocationViewer.cs" />
     <Compile Include="Source\DrawingComponents\AxisDrawers\AxisModelCreator.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Source\Exceptions\DecoratorIsntExistException.cs" />
     <Compile Include="Source\Exceptions\DecoratorLinkException.cs" />
     <Compile Include="Source\Exceptions\DimensionException.cs" />
+    <Compile Include="Source\Exceptions\DraiwngException.cs" />
     <Compile Include="Source\Exceptions\EqualDecoratorException.cs" />
     <Compile Include="Source\Interfaces\IDrawer.cs" />
     <Compile Include="Source\Interfaces\IModelCreator.cs" />

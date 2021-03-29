@@ -17,8 +17,12 @@ namespace Plots
 
         public void Draw(IDrawer drawer, PlotToModelProjector projector)
         {
-            var model = modelCreator.CreateModel(projector);
-            modelViewer.ShowModel(drawer, model);
+            try
+            {
+                var model = modelCreator.CreateModel(projector);
+                modelViewer.ShowModel(drawer, model);
+            }
+            catch
         }
     }
 }

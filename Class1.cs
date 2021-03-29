@@ -1,5 +1,4 @@
 ﻿using Plots.Exeptions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +17,7 @@ namespace Plots
         End
     }
 
-    public interface IDrawingProcessBlock 
+    public interface IDrawingProcessBlock
     {
         void Draw(IDrawer drawer, PlotToModelProjector projector);
         DrawQueue DrawQueue { get; }
@@ -26,12 +25,17 @@ namespace Plots
 
 
 
-    public class AllDrawer 
+    public class PlotDrawer 
     {
         public List<IDrawingProcessBlock> dr_blocks = new List<IDrawingProcessBlock>();
         public List<ISettingUpdateBlock> st_blocks = new List<ISettingUpdateBlock>();
 
         public PlotExtristics extristics;
+
+        public PlotDrawer()
+        {
+            
+        }
 
         public void Draw(IDrawer drawer) 
         {
@@ -46,55 +50,45 @@ namespace Plots
                 item.Draw(drawer, projector);
             }
         }
-    
-    }
 
+
+        public void AddDrawingBlock(IDrawingProcessBlock drawingBlock) 
+        {
+            for (int i = 0; i < dr_blocks.Count; i++)
+            {
+                if(drawingBlock.DrawQueue == dr_blocks[i].DrawQueue) 
+                {
+                    dr_blocks.Insert(i, drawingBlock);
+                    break;
+                }
+            }
+        }
+
+        public void AddSettingBlock(ISettingUpdateBlock updateBlock) 
+        {
+            st_blocks.Add(updateBlock);
+        }
+
+    //    private class Vallidator<T>
+    //    {
+    //        private PlotDrawer parent;
+
+    //        public Vallidator(PlotDrawer parent)
+    //        {
+    //            this.parent = parent;
+    //        }
+
+    //        public bool Validate(ISettingUpdateBlock value) 
+    //        {
+    //            return 
+    //        }
+    //    }
+    }
 
 
     public interface ISettingUpdateBlock 
     {
         PlotExtristics UpdateExtristics(PlotExtristics old);
-    }
-
-
-    public class SizeChangeBlock : ISettingUpdateBlock
-    {
-        private float step;
-
-        public void ChangeBy(float step) 
-        {
-            this.step = step;
-        }
-
-        public PlotExtristics UpdateExtristics(PlotExtristics old)
-        {
-            old.MultiplierX += step;
-            old.MultiplierY += step;
-            step = 0;
-            return old;
-        }
-    }
-
-
-    public class CenterMoveBlock : ISettingUpdateBlock
-    {
-        private float offsetX;
-        private float offsetY;
-
-        public void MoveCenter(float offsetX, float offsetY) 
-        {
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
-        }
-
-        public PlotExtristics UpdateExtristics(PlotExtristics old)
-        {
-            old.Center = PlotPoint.MoveFromOrigin(old.Center, offsetX, offsetY);
-            offsetX = 0;
-            offsetY = 0;
-
-            return old;
-        }
     }
 
 
